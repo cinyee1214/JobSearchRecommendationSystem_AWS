@@ -19,7 +19,6 @@ public class ExampleJobServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // response.getWriter().print("This is the example job servlet");
         response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         ExampleCoordinates coordinates = new ExampleCoordinates(37.485130, -122.148316);
