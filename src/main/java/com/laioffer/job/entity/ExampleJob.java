@@ -14,5 +14,4 @@ public class ExampleJob {
         this.remote = remote;
         this.coordinates = coordinates;
     }
-
 }
