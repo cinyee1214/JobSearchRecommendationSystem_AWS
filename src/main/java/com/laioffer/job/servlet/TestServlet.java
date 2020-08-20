@@ -1,5 +1,7 @@
 package com.laioffer.job.servlet;
 
+import com.laioffer.job.entity.Item;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
