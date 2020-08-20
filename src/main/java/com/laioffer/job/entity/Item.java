@@ -12,7 +12,7 @@ import java.util.Set;
 
 // @JsonIgnoreProperties(ignoreUnknown = true) indicates that other fields in the response can be safely ignored. Without this, you'll get an exception at runtime.
 // @JsonInclude(JsonInclude.Include.NON_NULL) indicates that null fields can be skipped and not included.
-// @JsonProperty("") indicates the mapping, the exact match is not required, but it's required for multi-word snake case and camel case conversions, like company_log to companyLogo.
+// @JsonProperty("") indicates the mapping, the exact match is not required, but it's required for multi-word snake case and camel case conversions, like company_logo to companyLogo.
 
 public class Item {
     private String id;
