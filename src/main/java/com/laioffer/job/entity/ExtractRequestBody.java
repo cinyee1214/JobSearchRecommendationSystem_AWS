@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class ExtractRequestBody {
+    @JsonProperty("data") // this could be omitted
     public List<String> data;
 
-    @JsonProperty("max_keywords")
-    public int maxKeywords;
+    @JsonProperty("max_keywords") // snake case
+    public int maxKeywords;  // camel case
 
     public ExtractRequestBody(List<String> data, int maxKeywords) {
         this.data = data;
