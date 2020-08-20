@@ -14,6 +14,9 @@ import java.util.Set;
 // @JsonInclude(JsonInclude.Include.NON_NULL) indicates that null fields can be skipped and not included.
 // @JsonProperty("") indicates the mapping, the exact match is not required, but it's required for multi-word snake case and camel case conversions, like company_logo to companyLogo.
 
+// The @JsonProperty annotation is used to map property names with JSON keys during serialization and deserialization.
+// By default, if you try to serialize a POJO, the generated JSON will have keys mapped to the fields of the POJO.
+
 public class Item {
     private String id;
     private String title;
