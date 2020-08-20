@@ -1,5 +1,7 @@
 package com.laioffer.job.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.laioffer.job.entity.Item;
 import com.laioffer.job.external.GitHubClient;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
 public class SearchServlet extends HttpServlet {
@@ -21,8 +24,13 @@ public class SearchServlet extends HttpServlet {
         double lon = Double.parseDouble(request.getParameter("lon"));
 
         GitHubClient client = new GitHubClient();
-        String itemsString = client.search(lat, lon, null);
+
         response.setContentType("application/json");
-        response.getWriter().print(itemsString);
+//        String itemsString = client.search(lat, lon, null);
+//        response.getWriter().print(itemsString);
+        List<Item> items = client.search(lat, lon, null);
+        ObjectMapper mapper = new ObjectMapper();
+        response.getWriter().print(mapper.writeValueAsString(items));
+
     }
 }
