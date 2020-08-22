@@ -31,6 +31,6 @@ public class SearchServlet extends HttpServlet {
         List<Item> items = client.search(lat, lon, null);
         ObjectMapper mapper = new ObjectMapper();
         response.getWriter().print(mapper.writeValueAsString(items));
-
+        // System.out.println(mapper.writeValueAsString(items));
     }
 }

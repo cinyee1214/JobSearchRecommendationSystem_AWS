@@ -7,10 +7,10 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+//import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
+//import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
@@ -55,7 +55,9 @@ public class GitHubClient {
 
             //return Arrays.asList(mapper.readValue(entity.getContent(), Item[].class));
             List<Item> items = Arrays.asList(mapper.readValue(entity.getContent(), Item[].class));
+            // System.out.println(items);
             extractKeywords(items);
+            // System.out.println(items);
             return items;
         };
 
@@ -80,7 +82,7 @@ public class GitHubClient {
         for (int i = 0; i < items.size(); i++) {
             items.get(i).setKeywords(keywordList.get(i));
         }
+        // System.out.println("private" + items);
     }
-
 
 }

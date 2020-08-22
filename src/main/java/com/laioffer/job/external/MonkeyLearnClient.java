@@ -59,8 +59,10 @@ public class MonkeyLearnClient {
                 }
                 keywordList.add(keywords);
             }
+            // System.out.println(keywordList);
             return keywordList;
         };
+
 
         try {
             return httpclient.execute(request, responseHandler);
@@ -82,5 +84,4 @@ public class MonkeyLearnClient {
         List<Set<String>> keywordList = client.extract(articles);
         System.out.println(keywordList);
     }
-
 }
