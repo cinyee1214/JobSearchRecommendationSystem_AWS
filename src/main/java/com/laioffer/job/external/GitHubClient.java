@@ -13,10 +13,7 @@ import java.io.IOException;
 //import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GitHubClient {
@@ -38,6 +35,7 @@ public class GitHubClient {
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
         // Create a custom response handler
+        // <option + enter> on "response" can replace the lambda
         ResponseHandler<List<Item>> responseHandler = response -> {
             if (response.getStatusLine().getStatusCode() != 200) {
                 return Collections.emptyList();
@@ -74,9 +72,16 @@ public class GitHubClient {
     private void extractKeywords(List<Item> items) {
         MonkeyLearnClient monkeyLearnClient = new MonkeyLearnClient();
 
+        // reactive programming (pipeline)
         List<String> descriptions = items.stream()
                 .map(Item::getDescription)
                 .collect(Collectors.toList());
+
+        // otherwise use for-loop
+//        List<String> descriptions = new ArrayList<>();
+//        for (Item item : items) {
+//            descriptions.add(item.getDescription());
+//        }
 
         List<Set<String>> keywordList = monkeyLearnClient.extract(descriptions);
         for (int i = 0; i < items.size(); i++) {
