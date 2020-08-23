@@ -25,6 +25,15 @@ public class Item {
     private String url;
     private String description;
     private Set<String> keywords;
+    private boolean favorite;
+
+   public boolean getFavorite() {
+       return favorite;
+   }
+
+   public void setFavorite(boolean favorite) {
+       this.favorite = favorite;
+   }
 
     // builder pattern
     // chaining call, return this
@@ -36,6 +45,7 @@ public class Item {
         private String url;
         private String description;
         private Set<String> keywords;
+        private boolean favorite;
 
         public Builder id(String id) {
             this.id = id;
@@ -72,6 +82,11 @@ public class Item {
             return this;
         }
 
+        public Builder favorite(Boolean favorite) {
+           this.favorite = favorite;
+           return this;
+        }
+
         public Item build() {
             Item item = new Item();
             item.id = id;
@@ -81,6 +96,7 @@ public class Item {
             item.url = url;
             item.description = description;
             item.keywords = keywords;
+            item.favorite = favorite;
             return item;
         }
     }
@@ -123,15 +139,26 @@ public class Item {
     }
 
     @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                ", companyLogo='" + companyLogo + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", keywords=" + keywords +
+                ", favorite=" + favorite +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(id, item.id) &&
+        return favorite == item.favorite &&
+                Objects.equals(id, item.id) &&
                 Objects.equals(title, item.title) &&
                 Objects.equals(location, item.location) &&
                 Objects.equals(companyLogo, item.companyLogo) &&
@@ -142,20 +169,6 @@ public class Item {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, location, companyLogo, url, description, keywords);
+        return Objects.hash(id, title, location, companyLogo, url, description, keywords, favorite);
     }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", location='" + location + '\'' +
-                ", companyLogo='" + companyLogo + '\'' +
-                ", url='" + url + '\'' +
-                ", description='" + description + '\'' +
-                ", keywords=" + keywords +
-                '}';
-    }
-
 }
