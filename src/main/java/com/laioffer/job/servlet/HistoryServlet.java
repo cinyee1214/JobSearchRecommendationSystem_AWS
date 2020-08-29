@@ -11,14 +11,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
 @WebServlet(name = "HistoryServlet", urlPatterns = {"/history"})
 public class HistoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
+        // response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
+
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.setStatus(403);
+            mapper.writeValue(response.getWriter(), new ResultResponse("Session Invalid"));
+            return;
+        }
+
         HistoryRequestBody body = mapper.readValue(request.getReader(), HistoryRequestBody.class);
 
         MySQLConnection connection = new MySQLConnection();
@@ -30,8 +39,15 @@ public class HistoryServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
+        // response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
+
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.setStatus(403);
+            mapper.writeValue(response.getWriter(), new ResultResponse("Session Invalid"));
+            return;
+        }
 
         String userId = request.getParameter("user_id");
 
@@ -45,6 +61,13 @@ public class HistoryServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
+
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.setStatus(403);
+            mapper.writeValue(response.getWriter(), new ResultResponse("Session Invalid"));
+            return;
+        }
 
         HistoryRequestBody body = mapper.readValue(request.getReader(), HistoryRequestBody.class);
 
