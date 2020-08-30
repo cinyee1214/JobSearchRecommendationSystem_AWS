@@ -19,9 +19,12 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         LoginRequestBody body = mapper.readValue(request.getReader(), LoginRequestBody.class);
+
         MySQLConnection connection = new MySQLConnection();
         LoginResponseBody loginResponseBody;
+
         if (connection.verifyLogin(body.userId, body.password)) {
+            // create a new session when login
             HttpSession session = request.getSession();
             session.setAttribute("user_id", body.userId);
             loginResponseBody = new LoginResponseBody("OK", body.userId, connection.getFullname(body.userId));
@@ -30,13 +33,17 @@ public class LoginServlet extends HttpServlet {
             response.setStatus(401);
         }
         connection.close();
+
         response.setContentType("application/json");
         mapper.writeValue(response.getWriter(), loginResponseBody);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
+
+        // if session exists, get it, otherwise will not creating a new session (false)
         HttpSession session = request.getSession(false);
+
         LoginResponseBody loginResponseBody;
         if (session != null) {
             MySQLConnection connection = new MySQLConnection();
@@ -47,6 +54,7 @@ public class LoginServlet extends HttpServlet {
             loginResponseBody = new LoginResponseBody("Invalid Session.", null, null);
             response.setStatus(403);
         }
+
         response.setContentType("application/json");
         mapper.writeValue(response.getWriter(), loginResponseBody);
     }
