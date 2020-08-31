@@ -18,7 +18,7 @@ import java.util.Set;
 @WebServlet(name = "HistoryServlet", urlPatterns = {"/history"})
 public class HistoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // response.setContentType("application/json");
+        response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
 
         HttpSession session = request.getSession(false);
@@ -39,7 +39,7 @@ public class HistoryServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // response.setContentType("application/json");
+        response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
 
         HttpSession session = request.getSession(false);
@@ -54,6 +54,7 @@ public class HistoryServlet extends HttpServlet {
         MySQLConnection connection = new MySQLConnection();
         Set<Item> items = connection.getFavoriteItems(userId);
         connection.close();
+
         mapper.writeValue(response.getWriter(), items);
     }
 

@@ -11,7 +11,7 @@ public class Recommendation {
     public List<Item> recommendItems(String userId, double lat, double lon) {
         List<Item> recommendedItems = new ArrayList<>();
 
-        // Step 1, get all favorited itemids
+        // Step 1, get all favorited item_ids
         MySQLConnection connection = new MySQLConnection();
         Set<String> favoritedItemIds = connection.getFavoriteItemIds(userId);
 
