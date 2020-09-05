@@ -27,5 +27,13 @@ public class LogoutServlet extends HttpServlet {
         ResultResponse resultResponse = new ResultResponse("OK");
         mapper.writeValue(response.getWriter(), resultResponse);
     }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        response.sendRedirect("index.html");
+    }
 }
 
