@@ -5,8 +5,8 @@
      */
     var user_id = '1111';
     var user_fullname = 'John';
-    var lng = -97.74;
-    var lat = 30.26;
+    var lng = -122.08;
+    var lat = 37.38;
 
     /**
      * Initialize major event handlers
