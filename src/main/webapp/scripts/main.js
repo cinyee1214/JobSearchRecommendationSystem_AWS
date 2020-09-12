@@ -124,7 +124,6 @@
         showElement(registerForm);
     }
 
-
     function initGeoLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
