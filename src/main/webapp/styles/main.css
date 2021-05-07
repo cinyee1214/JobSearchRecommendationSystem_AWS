@@ -318,7 +318,7 @@ ul {
 }
 
 .fav-link:hover {
-	color: #F13F3F;
+	color: #f13f3f;
 }
 
 /**
@@ -327,7 +327,8 @@ ul {
 footer {
 	background: #434343;
 	font-size: 0.8em;
-	height: 200px;
+	color: white;
+	height: 160px;
 	position: relative;
 }
 

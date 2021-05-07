@@ -21,16 +21,20 @@ public class GitHubClient {
     private static final String DEFAULT_KEYWORD = "developer";
 
     public List<Item> search(double lat, double lon, String keyword) {
-        if (keyword == null) {
-            keyword = DEFAULT_KEYWORD;
+        String url;
+        if (keyword.equals("NA")) {
+//            keyword = DEFAULT_KEYWORD;`
+            url = String.format("https://jobs.github.com/positions.json?lat=%s&long=%s", lat, lon);
+        } else {
+            try {
+                keyword = URLEncoder.encode(keyword, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            url = String.format(URL_TEMPLATE, keyword, lat, lon);
         }
 
-        try {
-            keyword = URLEncoder.encode(keyword, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        String url = String.format(URL_TEMPLATE, keyword, lat, lon);
+        System.out.println(url);
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
 

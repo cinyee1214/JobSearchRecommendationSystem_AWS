@@ -33,6 +33,7 @@ public class SearchServlet extends HttpServlet {
 
         // response.getWriter().write("This is SearchServlet");
         String userId = request.getParameter("user_id");
+        String keyword = request.getParameter("key");
 
         double lat = Double.parseDouble(request.getParameter("lat"));
         double lon = Double.parseDouble(request.getParameter("lon"));
@@ -43,9 +44,11 @@ public class SearchServlet extends HttpServlet {
 
         GitHubClient client = new GitHubClient();
         response.setContentType("application/json");
-        List<Item> items = client.search(lat, lon, null);
+        List<Item> items = client.search(lat, lon, keyword);
 
+        System.out.println(items.size());
         for (Item item : items) {
+//            System.out.println(item);
             item.setFavorite(favoriteItemIds.contains(item.getId()));
         }
 

@@ -31,9 +31,9 @@ public class Recommendation {
                 Integer.compare(e2.getValue(), e1.getValue()));
 
         // Cut down search list only top 3
-        if (keywordList.size() > 3) {
-            keywordList = keywordList.subList(0, 3);
-        }
+//        if (keywordList.size() > 3) {
+//            keywordList = keywordList.subList(0, 3);
+//        }
 
         // Step 3, search based on keywords, filter out favorite items
         Set<String> visitedItemIds = new HashSet<>();

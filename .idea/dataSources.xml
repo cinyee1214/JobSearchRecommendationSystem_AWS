@@ -5,7 +5,14 @@
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://laiproject-instance.cu9ok7w4m5lw.us-east-2.rds.amazonaws.com:3306/laiproject</jdbc-url>
+      <jdbc-url>jdbc:mysql://job-instance.cjd8zwum0b5m.us-east-1.rds.amazonaws.com:3306/job</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="@localhost" uuid="6bd5ed9b-b5ef-4f00-9e70-5ac3d65737a4">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

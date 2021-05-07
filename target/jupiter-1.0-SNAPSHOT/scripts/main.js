@@ -8,6 +8,9 @@
     var lng = -122.08;
     var lat = 37.38;
 
+    // var lng = -74.00;
+    // var lat = 40.71;
+
     /**
      * Initialize major event handlers
      */
@@ -18,6 +21,7 @@
         document.querySelector('#register-form-btn').addEventListener('click', showRegisterForm);
         document.querySelector('#register-btn').addEventListener('click', register);
         document.querySelector('#nearby-btn').addEventListener('click', loadNearbyItems);
+        document.querySelector('#chat-btn').addEventListener('click', loadChatItems);
         document.querySelector('#fav-btn').addEventListener('click', loadFavoriteItems);
         document.querySelector('#recommend-btn').addEventListener('click', loadRecommendedItems);
         validateSession();
@@ -61,6 +65,7 @@
         var avatar = document.querySelector('#avatar');
         var welcomeMsg = document.querySelector('#welcome-msg');
         var logoutBtn = document.querySelector('#logout-link');
+        var chatBtn = document.querySelector('#ai-btn');
 
         welcomeMsg.innerHTML = 'Welcome, ' + user_fullname;
 
@@ -69,6 +74,7 @@
         showElement(avatar);
         showElement(welcomeMsg);
         showElement(logoutBtn, 'inline-block');
+        showElement(chatBtn);
         hideElement(loginForm);
         hideElement(registerForm);
 
@@ -83,10 +89,12 @@
         var avatar = document.querySelector('#avatar');
         var welcomeMsg = document.querySelector('#welcome-msg');
         var logoutBtn = document.querySelector('#logout-link');
+        var chatBtn = document.querySelector('#ai-btn');
 
         hideElement(itemNav);
         hideElement(itemList);
         hideElement(avatar);
+        hideElement(chatBtn);
         hideElement(logoutBtn);
         hideElement(welcomeMsg);
         hideElement(registerForm);
@@ -123,7 +131,6 @@
         clearRegisterResult();
         showElement(registerForm);
     }
-
 
     function initGeoLocation() {
         if (navigator.geolocation) {
@@ -376,8 +383,9 @@
         activeBtn('nearby-btn');
 
         // The request parameters
+        let keyword = 'NA';
         var url = './search';
-        var params = 'user_id=' + user_id + '&lat=' + lat + '&lon=' + lng;
+        var params = 'user_id=' + user_id + '&lat=' + lat + '&lon=' + lng + '&key=' + keyword;
         var data = null;
 
         // display loading message
@@ -397,6 +405,37 @@
             // failed callback
             function() {
                 showErrorMessage('Cannot load nearby items.');
+            }
+        );
+    }
+
+    function loadChatItems() {
+        console.log('loadChatItems');
+        activeBtn('chat-btn');
+
+        // The request parameters
+        let url = './search';
+        let params = 'user_id=' + user_id + '&lat=' + sessionStorage.getItem("lat") + '&lon=' + sessionStorage.getItem("lng") + '&key=' + sessionStorage.getItem("keyword");
+        let data = null;
+
+        console.log(params);
+        // display loading message
+        showLoadingMessage('Loading AI recommended items...');
+
+        // make AJAX call
+        ajax('GET', url + '?' + params, data,
+            // successful callback
+            function(res) {
+                var items = JSON.parse(res);
+                if (!items || items.length === 0) {
+                    showWarningMessage('No item.');
+                } else {
+                    listItems(items);
+                }
+            },
+            // failed callback
+            function() {
+                showErrorMessage('Cannot load AI recommended items.');
             }
         );
     }
