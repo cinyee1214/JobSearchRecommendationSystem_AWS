@@ -396,6 +396,8 @@
             // successful callback
             function(res) {
                 var items = JSON.parse(res);
+                console.log('line 399');
+                console.log(items);
                 if (!items || items.length === 0) {
                     showWarningMessage('No nearby item.');
                 } else {
@@ -590,7 +592,7 @@
             }));
         } else {
             li.appendChild($create('img', {
-                src : 'https://via.placeholder.com/100'
+                src : 'https://i.imgur.com/YCdWeb3.png'
             }));
         }
         // section
