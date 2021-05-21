@@ -213,7 +213,8 @@ public class AdzunaClient {
     }
 
 //    public static void main(String[] args){
-//        List<Item> results = search(40.71,-73.96, "developer");
+//        AdzunaClient client = new AdzunaClient();
+//        List<Item> results = client.search(40.71,-73.96, "developer");
 //        System.out.println(results.get(0));
 //    }
 
