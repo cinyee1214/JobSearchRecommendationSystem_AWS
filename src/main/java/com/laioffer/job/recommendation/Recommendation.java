@@ -2,6 +2,7 @@ package com.laioffer.job.recommendation;
 
 import com.laioffer.job.db.MySQLConnection;
 import com.laioffer.job.entity.Item;
+import com.laioffer.job.external.AdzunaClient;
 import com.laioffer.job.external.GitHubClient;
 
 import java.util.*;
@@ -30,6 +31,10 @@ public class Recommendation {
         keywordList.sort((Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) ->
                 Integer.compare(e2.getValue(), e1.getValue()));
 
+        System.out.println("Rec line 33");
+        System.out.println(keywordList.get(0).getKey());
+        System.out.println(keywordList.get(0).getValue());
+        System.out.println(keywordList.size());
         // Cut down search list only top 3
 //        if (keywordList.size() > 3) {
 //            keywordList = keywordList.subList(0, 3);
@@ -37,10 +42,14 @@ public class Recommendation {
 
         // Step 3, search based on keywords, filter out favorite items
         Set<String> visitedItemIds = new HashSet<>();
-        GitHubClient client = new GitHubClient();
+        AdzunaClient client = new AdzunaClient();
 
         for (Map.Entry<String, Integer> keyword : keywordList) {
             List<Item> items = client.search(lat, lon, keyword.getKey());
+
+            System.out.println("Rec line 45");
+            System.out.println(items.get(0));
+            System.out.println(items.size());
 
             for (Item item : items) {
                 if (!favoritedItemIds.contains(item.getId()) && !visitedItemIds.contains(item.getId())) {

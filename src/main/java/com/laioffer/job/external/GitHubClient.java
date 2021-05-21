@@ -23,7 +23,7 @@ public class GitHubClient {
     public List<Item> search(double lat, double lon, String keyword) {
         String url;
         if (keyword.equals("NA")) {
-//            keyword = DEFAULT_KEYWORD;`
+//            keyword = DEFAULT_KEYWORD;
             url = String.format("https://jobs.github.com/positions.json?lat=%s&long=%s", lat, lon);
         } else {
             try {

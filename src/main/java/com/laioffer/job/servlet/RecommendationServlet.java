@@ -38,6 +38,7 @@ public class RecommendationServlet extends HttpServlet {
 
         Recommendation recommendation = new Recommendation();
         List<Item> items = recommendation.recommendItems(userId, lat, lon);
+        System.out.println("line 41");
         // response.getWriter().print(mapper.writeValueAsString(items));
         mapper.writeValue(response.getWriter(), items);
 

@@ -623,7 +623,7 @@
 
         // ',' => '<br/>', '\"' => ''
         address.innerHTML = item.location.replace(/,/g, '<br/>').replace(/\"/g,
-            '');
+            '').replaceAll('+', ' ');
         li.appendChild(address);
 
         // favorite link

@@ -5,6 +5,7 @@ import com.laioffer.job.db.MySQLConnection;
 import com.laioffer.job.entity.Item;
 import com.laioffer.job.entity.ResultResponse;
 import com.laioffer.job.external.GitHubClient;
+import com.laioffer.job.external.AdzunaClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,13 +43,17 @@ public class SearchServlet extends HttpServlet {
         Set<String> favoriteItemIds = connection.getFavoriteItemIds(userId);
         connection.close();
 
-        GitHubClient client = new GitHubClient();
+        AdzunaClient client = new AdzunaClient();
+//        GitHubClient client = new GitHubClient();
         response.setContentType("application/json");
+        System.out.println("entering search function");
         List<Item> items = client.search(lat, lon, keyword);
+        System.out.println("exiting search function");
 
         System.out.println(items.size());
         for (Item item : items) {
-//            System.out.println(item);
+            System.out.println("line 53 in SearchServlet");
+            System.out.println(item);
             item.setFavorite(favoriteItemIds.contains(item.getId()));
         }
 
